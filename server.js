@@ -49,53 +49,6 @@ app.get("/scrape", (req, res) => {
     // First, we grab the body of the html with request
     axios.get("https://www.echojs.com/").then((response) => {
 
-        // Then, we load that into cheerio and save it to $ for a shorthand selector
-        // console.log("Hello");
-        // const $ = cheerio.load(response);
-
-        // let count = 0;
-        // // Now, we grab every article:
-        // $('article h2').each(function (i, element) {
-        //     // Save an empty result object
-        //     let count = i;
-        //     let result = {};
-        //     // Add the text and href of every link, and summary and byline, saving them to object
-        //     result.title = $(this)
-        //         .children('.story-heading')
-        //         .children('a')
-        //         .text().trim();
-        //     result.link = $(this)
-        //         .children('.story-heading')
-        //         .children('a')
-        //         .attr("href");
-        //     result.summary = $(this)
-        //         .children('.summary')
-        //         .text().trim()
-        //         || $(this)
-        //             .children('ul')
-        //             .text().trim();
-        //     result.byline = $(this)
-        //         .children('.byline')
-        //         .text().trim()
-
-        //     console.log(result);
-
-        //     if (result.title && result.link && result.summary){
-        //         // Create a new Article using the `result` object built from scraping, but only if both values are present
-        //         db.Article.create(result)
-        //             .then(function (dbArticle) {
-        //                 // View the added result in the console
-        //                 console.log(dbArticle);
-        //                 // count++;
-        //             })
-        //             .catch(function (err) {
-        //                 // If an error occurred, send it to the client
-        //                 return res.json(err);
-        //             });
-        //     };
-        // });
-        // // If we were able to successfully scrape and save an Article, redirect to index
-        // res.redirect('/');
         var $ = cheerio.load(response.data);
 
         // Now, we grab every h2 within an article tag, and do the following:
@@ -228,8 +181,6 @@ app.post("/note/:id", function (req, res) {
     db.Note.create(req.body)
         .then(function (dbNote) {
             // If a Note was created successfully, find one Article with an `_id` equal to `req.params.id`. Update the Article to be associated with the new Note
-            // { new: true } tells the query that we want it to return the updated User -- it returns the original by default
-            // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
             return db.Article.findOneAndUpdate({ _id: req.params.id }, { $push: { note: dbNote._id } }, { new: true });
         })
         .then(function (dbArticle) {

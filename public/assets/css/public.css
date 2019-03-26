@@ -1,7 +1,9 @@
-.background-image{
-  background-color: red;
-  background-image: url("../images/newspaper.jpg");
-  
+h1 {
+  color: #b21f2d;
+}
+
+.bg-danger {
+  background-color: #b21f2d!important;
 }
 
 @media (min-width: 1px) {

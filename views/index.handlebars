@@ -18,7 +18,7 @@
         <div class="jumbotron text-center background-image">
             <div class="overlay">
                 <div class="caption">
-                    <h1 class="display-1 text-white">EchoJS Scraper</h1>
+                    <h1 class="display-1">EchoJS Scraper</h1>
                 </div>
             </div>
         </div>
@@ -27,7 +27,7 @@
             {{#if articles}}
             {{#each articles}}
                 <div class="card w-90">
-                    <div class="card-header text-white bg-primary">
+                    <div class="card-header text-white bg-primary no-articles">
                         <a href={{link}} target="_blank" class="text-white">
                             <h2>{{title}}</h2>
                         </a>
@@ -41,7 +41,7 @@
                 </div>
             {{/each}}
             {{else}}
-                <div class="card text-white bg-warning w-90 p-1">
+                <div class="card text-white bg-danger w-90 p-1">
                     <div class="card-body text-center">
                         There are no new articles.
                     </div>
